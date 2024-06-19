@@ -1,0 +1,6 @@
+﻿services:
+  trackingservice:
+    image: trackingservice
+    build:
+      context: .
+      dockerfile: TrackingService/Dockerfile
