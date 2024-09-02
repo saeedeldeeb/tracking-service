@@ -10,10 +10,8 @@
     environment:
       - REDIS_PASSWORD=secret
       - TZ=Africa/Cairo
-    container_name: ${REDIS_CONTAINER_NAME}
+    container_name: tracking-redis
     healthcheck:
       test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
-    networks:
-      - ouredu-service-app
     ports:
       - "3796:6379"

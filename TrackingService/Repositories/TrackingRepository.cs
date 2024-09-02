@@ -28,7 +28,8 @@ public class TrackingRepository : ITrackingRepository
 
     public bool VehicleExists(string busId)
     {
-        return bool.Parse(_redis.GetDatabase().StringGet($"vehicle:{busId}:exists").ToString());
+        var value = _redis.GetDatabase().StringGet($"vehicle:{busId}:exists").ToString();
+        return bool.TryParse(value, out var exists) && exists || value == "1";
     }
 
     public Vehicle? GetLastPoint(string busId)
