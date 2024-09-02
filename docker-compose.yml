@@ -4,3 +4,16 @@
     build:
       context: .
       dockerfile: TrackingService/Dockerfile
+
+  redis:
+    image: redis:7.2-alpine
+    environment:
+      - REDIS_PASSWORD=secret
+      - TZ=Africa/Cairo
+    container_name: ${REDIS_CONTAINER_NAME}
+    healthcheck:
+      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
+    networks:
+      - ouredu-service-app
+    ports:
+      - "3796:6379"
